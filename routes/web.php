@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome'); // or any other view you want to load
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    \Log::info("Accessing project with ID:");
+    return file_get_contents(public_path('index.html'));
+});
+
+Route::get('/projects', function () {
+    return file_get_contents(public_path('projects.html'));
+});
+
+Route::get('/projects/{id}', function ($id) {
+    return file_get_contents(public_path('project-details.html'));
 });

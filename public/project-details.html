@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="#" id="logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1 id="project-title">Project Name</h1>
+        <p id="project-description">Project Description</p>
+        <h2>Tasks</h2>
+        <select id="status-filter">
+            <option value="">All Statuses</option>
+            <option value="todo">To Do</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+        </select>
+        <ul id="task-list"></ul>
+        <form id="task-form">
+            <input type="text" id="task-name" placeholder="Task Name" required>
+            <textarea id="task-description" placeholder="Task Description"></textarea>
+            <select id="task-status">
+                <option value="todo">To Do</option>
+                <option value="in-progress">In Progress</option>
+                <option value="done">Done</option>
+            </select>
+            <button type="submit">Add/Update Task</button>
+        </form>
+    </div>
+    <script src="js/auth.js"></script>
+    <script src="js/tasks.js"></script>
+</body>
+</html>
