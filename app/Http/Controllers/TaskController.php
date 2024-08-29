@@ -29,7 +29,9 @@ class TaskController extends Controller
 
         $task = $this->taskRepository->create([
             'project_id' => $projectId,
-            $validated
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'status' => $validated['status'],
         ]);
 
         return response()->json($task, 201);
