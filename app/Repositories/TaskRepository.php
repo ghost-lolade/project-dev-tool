@@ -11,6 +11,18 @@ class TaskRepository implements TaskRepositoryInterface
         return Task::all();
     }
 
+    public function allByProject($projectId)
+    {
+        return Task::where('project_id', $projectId)->get();
+    }
+
+    public function filterByStatus($projectId, $status)
+    {
+        return Task::where('project_id', $projectId)
+                    ->where('status', $status)
+                    ->get();
+    }
+
     public function find($id)
     {
         return Task::findOrFail($id);

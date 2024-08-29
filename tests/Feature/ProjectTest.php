@@ -36,6 +36,20 @@ class ProjectTest extends TestCase
     }
 
     /** @test */
+    public function it_can_search_projects_by_name()
+    {
+        Project::factory()->create(['name' => 'Laravel Project']);
+        Project::factory()->create(['name' => 'React Project']);
+
+        $response = $this->getJson('/api/projects?search=Laravel');
+
+        $response->assertStatus(200)
+                ->assertJsonCount(1)
+                ->assertJsonFragment(['name' => 'Laravel Project']);
+    }
+
+
+    /** @test */
     public function it_can_update_a_project()
     {
         $project = Project::factory()->create();

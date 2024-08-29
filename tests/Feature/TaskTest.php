@@ -41,6 +41,21 @@ class TaskTest extends TestCase
     }
 
     /** @test */
+    public function it_can_filter_tasks_by_status()
+    {
+        $project = Project::factory()->create();
+        Task::factory()->create(['project_id' => $project->id, 'status' => 'todo']);
+        Task::factory()->create(['project_id' => $project->id, 'status' => 'done']);
+
+        $response = $this->getJson('/api/projects/' . $project->id . '/tasks?status=done');
+
+        $response->assertStatus(200)
+                ->assertJsonCount(1)
+                ->assertJsonFragment(['status' => 'done']);
+    }
+
+
+    /** @test */
     public function it_can_update_a_task()
     {
         $project = Project::factory()->create();

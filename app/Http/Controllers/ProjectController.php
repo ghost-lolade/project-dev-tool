@@ -14,9 +14,17 @@ class ProjectController extends Controller
         $this->projectRepository = $projectRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json($this->projectRepository->all());
+        $search = $request->query('search');
+
+        if ($search) {
+            $projects = $this->projectRepository->searchByName($search);
+        } else {
+            $projects = $this->projectRepository->all();
+        }
+
+        return response()->json($projects, 200);
     }
 
     public function store(Request $request)

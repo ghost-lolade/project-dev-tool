@@ -6,6 +6,8 @@ use App\Models\Project;
 
 interface ProjectRepositoryInterface
 {
+    public function searchByName($name);
+
     public function all();
 
     public function find($id);

@@ -14,9 +14,17 @@ class TaskController extends Controller
         $this->taskRepository = $taskRepository;
     }
 
-    public function index($projectId)
+    public function index(Request $request, $projectId)
     {
-        return response()->json($this->taskRepository->all()->where('project_id', $projectId));
+        $status = $request->query('status');
+
+        if ($status) {
+            $tasks = $this->taskRepository->filterByStatus($projectId, $status);
+        } else {
+            $tasks = $this->taskRepository->allByProject($projectId);
+        }
+
+        return response()->json($tasks, 200);
     }
 
     public function store(Request $request, $projectId)

@@ -8,6 +8,10 @@ interface TaskRepositoryInterface
 {
     public function all();
 
+    public function allByProject($projectId);
+
+    public function filterByStatus($projectId, $status);
+
     public function find($id);
 
     public function create(array $data);

@@ -6,6 +6,11 @@ use App\Models\Project;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
+    public function searchByName($name)
+    {
+        return Project::where('name', 'like', '%' . $name . '%')->get();
+    }
+
     public function all()
     {
         return Project::all();
