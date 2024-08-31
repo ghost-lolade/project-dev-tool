@@ -1,64 +1,155 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Project Management Tool
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a simple project management tool built with Laravel, providing a basic interface for creating, updating, deleting, and managing projects and tasks. The frontend is implemented using plain HTML, CSS, and JavaScript. Real-time updates are powered by Laravel Echo and Pusher, ensuring that tasks are updated dynamically without needing to refresh the page.
 
-## About Laravel
+## Table of Contents
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Design Pattern](#design-pattern)
+- [Code Structure](#code-structure)
+- [Usage](#usage)
+- [Credits](#credits)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **CRUD Operations for Projects and Tasks**: Create, read, update, and delete projects and tasks.
+- **Real-Time Updates**: Automatically update the task list when a new task is added using Laravel Echo and Pusher.
+- **Authentication**: Basic user authentication using Laravel's sanctum.
+- **User-Friendly Interface**: Simple and intuitive UI with responsive design.
+- **Task Filtering**: Filter tasks by their status (To Do, In Progress, Done).
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prerequisites
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP >= 8.1
+- Composer
+- Node.js with npm
+- MySQL or MariaDB
+- Pusher Account (for real-time updates)
 
-## Laravel Sponsors
+### Setup
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. **Clone the Repository:**
 
-### Premium Partners
+   ```bash
+   git clone https://github.com/yourusername/project-management-tool.git
+   cd project-management-tool
+   ```
+2. **Install PHP Dependencies:**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+   ```bash
+   composer install
+   ```
+3. **Install JavaScript Dependencies:**
 
-## Contributing
+   ```bash
+   npm install
+   ```
+4. **Set Up Environment Variables:**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   Copy the `.env.example` file to `.env` and update the following fields with your database and Pusher credentials:
 
-## Code of Conduct
+   ```bash
+   cp .env.example .env
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   Update the `.env` file:
 
-## Security Vulnerabilities
+   ```dotenv
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=project_management
+   DB_USERNAME=your_db_username
+   DB_PASSWORD=your_db_password
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   SESSION_DOMAIN=localhost
+   SANCTUM_STATEFUL_DOMAINS=localhost
 
-## License
+   BROADCAST_DRIVER=pusher
+   PUSHER_APP_ID=your-pusher-app-id
+   PUSHER_APP_KEY=your-pusher-app-key
+   PUSHER_APP_SECRET=your-pusher-app-secret
+   PUSHER_APP_CLUSTER=your-pusher-cluster
+   ```
+5. **Run Migrations and Seed the Database:**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   ```bash
+   php artisan migrate --seed
+   ```
+6. **Run the Development Server:**
+
+   ```bash
+   php artisan serve
+   ```
+
+   Your application will be accessible at `http://127.0.0.1:8000`.
+
+## Usage
+
+- **Access the Application:** Navigate to `http://127.0.0.1:8000` in your web browser.
+- **Authentication:** Register a new user or log in with an existing account.
+- **Manage Projects and Tasks:**
+  - View a list of all projects.
+  - Create, update, or delete projects.
+  - View tasks associated with a specific project.
+  - Add, update, or delete tasks.
+  - Filter tasks by their status.
+- **Real-Time Updates:**
+  - The task list automatically updates when a new task is added or existing tasks are modified.
+
+## Design Pattern
+
+This project utilizes the **Repository Pattern** to abstract the data access layer for Projects and Tasks. By separating the business logic from the data access logic, the application achieves better modularity, making it easier to manage and maintain.
+
+### Example:
+
+- **ProjectRepository**: Handles all database operations related to projects.
+- **TaskRepository**: Manages database interactions for tasks.
+
+The repositories are injected into the controllers to ensure a clean separation of concerns and promote code reusability.
+
+## Code Structure
+
+The project follows a clean and organized code structure:
+
+- **app/Http/Controllers/**: Contains the controllers that handle HTTP requests.
+- **app/Repositories/**: Contains the repositories for managing data access.
+- **database/migrations/**: Database migration files.
+- **database/seeders/**: Seeders for populating the database with initial data.
+- **public/**: Contains the frontend files (HTML, CSS, JS).
+  - `js/auth.js`: Manages authentication-related JavaScript logic.
+  - `js/tasks.js`: Handles task management logic and real-time updates.
+  - `css/styles.css`: Stylesheet for the frontend.
+  - `projects.html`
+  - `project-details.html`
+  - `login.html`
+  - `register.html`
+- **routes/web.php**: Contains the web routes for the application.
+- **routes/api.php**: Contains the API routes used by the frontend.
+
+
+## Usage
+
+### Authentication
+
+* **Login** : Navigate to `/login.html` to log in.
+* **Register** : Navigate to `/register.html` to create a new account.
+
+### Projects
+
+* **List Projects** : Navigate to `/projects.html` to view all projects.
+* **Create/Update Project** : Use the form on the project page to create or update a project.
+
+### Tasks
+
+* **View Tasks** : Click view button beside a project to view the tasks attached to it, it takes you to `/project-details.html`.
+* **Add/Update Task** : Use the form on the task page to create or update a task in a project
+* **Delete Task** : Click the delete button beside each task to delete tasks
+
+## Credits
+
+This project was developed by Lolade. Special thanks to the Laravel and Pusher communities for providing excellent tools and documentation.
