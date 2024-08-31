@@ -1,3 +1,12 @@
+// Initialize Echo in tasks.js
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '04e77a2060df7d353491', // Replace with your actual Pusher App Key
+    cluster: 'mt1', // Replace with your actual Pusher Cluster
+    forceTLS: true,
+    encrypted: true,
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('id');
@@ -177,4 +186,12 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    // Listen for real-time task updates
+    window.Echo.channel('tasks')
+        .listen('TaskCreated', (e) => {
+            console.log('Task Created:', e.task);
+            tasks.push(e.task);
+            displayTasks(tasks);
+        });
 });

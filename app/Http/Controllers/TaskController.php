@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\TaskRepositoryInterface;
+use App\Events\TaskCreated;
 use Illuminate\Http\Request;
+use App\Repositories\TaskRepositoryInterface;
 
 class TaskController extends Controller
 {
@@ -41,6 +42,9 @@ class TaskController extends Controller
             'description' => $validated['description'],
             'status' => $validated['status'],
         ]);
+
+        // Broadcast the event
+        broadcast(new TaskCreated($task))->toOthers();
 
         return response()->json($task, 201);
     }
