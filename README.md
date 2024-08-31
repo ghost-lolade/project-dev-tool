@@ -35,7 +35,7 @@ This is a simple project management tool built with Laravel, providing a basic i
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/project-management-tool.git
+   git clone https://github.com/ghost-lolade/project-management-tool.git
    cd project-management-tool
    ```
 2. **Install PHP Dependencies:**
